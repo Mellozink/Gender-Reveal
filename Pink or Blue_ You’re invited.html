@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pink or Blue? You’re invited</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--pink:#f4b6c8;--blue:#a9cdf0;--ink:#1f2a44;--bg:#fffafb;--card:#ffffff;--text:#1f2a44;--muted:#5b6682;--line:#e6dfe8;--accent:#1f2a44;--accent-t:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a2b;--card:#1d2540;--text:#f3eef6;--muted:#aab3cc;--line:#323c5e;--accent:#f3eef6;--accent-t:#1f2a44}}
+:root[data-theme="dark"]{--bg:#141a2b;--card:#1d2540;--text:#f3eef6;--muted:#aab3cc;--line:#323c5e;--accent:#f3eef6;--accent-t:#1f2a44}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2{font-family:Fredoka,"DM Sans",system-ui,sans-serif;margin:0;line-height:1.05}
+.hero{position:relative;min-height:88vh;display:grid;place-items:center;text-align:center;padding:48px 20px;color:var(--ink);
+background:linear-gradient(105deg,var(--pink) 0 50%,var(--blue) 50% 100%);overflow:hidden}
+.hero::after{content:"";position:absolute;left:50%;top:-10%;bottom:-10%;width:6px;background:#fff;transform:translateX(-50%) skewX(-8deg);opacity:.85}
+.hero>div{position:relative;z-index:1;max-width:640px}
+.small{font-size:1.05rem;font-weight:500;margin:0 0 10px}
+.hero h1{font-size:clamp(3rem,13vw,7rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 .q{display:inline-block;animation:wob 2.4s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) scale(1.06)}}
+.hero p.lead{font-size:1.2rem;margin:18px auto 28px;max-width:30ch;background:rgba(255,255,255,.7);border-radius:16px;padding:10px 16px}
+.btn{display:inline-block;border:0;border-radius:999px;background:var(--ink);color:#fff;font:700 1rem "DM Sans",sans-serif;padding:14px 28px;cursor:pointer;text-decoration:none}
+.hero .btn{background:var(--ink);color:#fff}
+.btn:focus-visible,input:focus-visible,select:focus-visible,.chip input:focus-visible+span,.team input:focus-visible+span{outline:3px solid #f08aa8;outline-offset:3px}
+main{max-width:720px;margin:0 auto;padding:56px 20px 72px}
+h2{font-size:2rem;margin-bottom:14px}
+section{margin-bottom:56px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.fact b{display:block;font-family:Fredoka,sans-serif;font-size:1.25rem}
+.fact span{color:var(--muted);font-size:.95rem}
+form{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;display:grid;gap:22px}
+label.f,legend{font-weight:700;display:block;margin-bottom:8px;padding:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+input[type=text],input[type=number],select{width:100%;font:inherit;color:var(--text);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px}
+.row{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.hint{color:var(--muted);font-size:.92rem;margin:-4px 0 10px}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.team label,.chip{position:relative;cursor:pointer}
+.team input,.chip input{position:absolute;opacity:0}
+.team span{display:block;text-align:center;padding:16px 8px;border-radius:16px;font:700 1.15rem Fredoka,sans-serif;color:var(--ink);border:3px solid transparent}
+.team .p span{background:var(--pink)}.team .b span{background:var(--blue)}
+.team input:checked+span{border-color:var(--ink);box-shadow:0 0 0 3px #fff inset}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip span{display:inline-block;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);font-weight:500}
+.chip input:checked+span{background:var(--accent);color:var(--accent-t);border-color:var(--accent)}
+.out{display:none;background:var(--bg);border:1.5px dashed var(--line);border-radius:16px;padding:16px;white-space:pre-wrap}
+.out.on{display:block}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.btn.alt{background:transparent;color:var(--text);border:1.5px solid var(--text)}
+.err{color:#c0334f;font-weight:500;min-height:1.2em;margin:0}
+footer{text-align:center;color:var(--muted);padding:0 20px 40px}
+.hero>.balloons{position:absolute;inset:0;max-width:none;z-index:0;pointer-events:none}
+.balloons i{position:absolute;bottom:-100px;left:var(--x);width:54px;height:66px;background:var(--c);border-radius:50% 50% 48% 48%;animation:rise var(--t,10s) linear infinite;animation-delay:var(--d,0s)}
+.balloons i::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:44px;background:rgba(31,42,68,.35)}
+@keyframes rise{0%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-55vh) rotate(6deg)}100%{transform:translateY(-120vh) rotate(-5deg)}}
+.bars{display:grid;gap:12px}
+.bar{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative;height:54px}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.bar b{position:relative;display:flex;justify-content:space-between;padding:0 16px;line-height:54px;font:700 1.1rem Fredoka,sans-serif;color:var(--ink)}
+#lead{font:700 1.5rem Fredoka,sans-serif;margin:0 0 4px}
+#results{display:none}#results.on{display:grid;gap:14px}
+.conf{position:fixed;top:-20px;width:10px;height:16px;z-index:50;pointer-events:none;animation:fall 2.6s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(720deg);opacity:.9}}
+@media (prefers-reduced-motion:reduce){.hero h1 .q,.balloons i{animation:none}.balloons{display:none}.bar i{transition:none}}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="balloons" aria-hidden="true"><i style="--x:6%;--c:#ee7fa3;--t:11s"></i><i style="--x:22%;--c:#6aa9e0;--t:13s;--d:-5s"></i><i style="--x:40%;--c:#6aa9e0;--t:10s;--d:-2s"></i><i style="--x:58%;--c:#ee7fa3;--t:12s;--d:-8s"></i><i style="--x:76%;--c:#ee7fa3;--t:14s;--d:-4s"></i><i style="--x:90%;--c:#6aa9e0;--t:11s;--d:-9s"></i></div>
+<div>
+<p class="small" id="hosts">Dave &amp; Charisse are expecting</p>
+<h1>Pink or Blue<span class="q">?</span></h1>
+<p class="lead">Come find out with us. The big reveal is almost here.</p>
+<a class="btn" href="#rsvp">RSVP</a>
+</div>
+</header>
+<main>
+<section>
+<h2>The details</h2>
+<div class="facts">
+<div class="fact"><b id="date">Saturday, December 12</b><span>Mark your calendar</span></div>
+<div class="fact"><b id="time">3:00 PM</b><span>Reveal at 4:00 PM sharp</span></div>
+<div class="fact"><b id="place">Our backyard</b><span id="addr">123 Sampaguita St., Cebu City</span></div>
+</div>
+<p style="margin-top:18px">Wear pink or blue to show which team you’re on. There will be food, drinks, and games before the reveal.</p>
+</section>
+
+<section id="vote">
+<h2>Cast your vote</h2>
+<form id="vf" novalidate>
+<div class="row">
+<div><label class="f" for="vname">Your name</label><input id="vname" type="text" autocomplete="name"></div>
+<div><label class="f" for="vphone">Phone number</label><input id="vphone" type="text" inputmode="tel" autocomplete="tel"></div>
+</div>
+<p class="hint" style="margin:0">One vote per phone number. We keep a scrambled version of your number, not the number itself.</p>
+<fieldset>
+<legend>Who are you on?</legend>
+<div class="team">
+<label class="p"><input type="radio" name="vt" value="pink"><span>Team Pink</span></label>
+<label class="b"><input type="radio" name="vt" value="blue"><span>Team Blue</span></label>
+</div>
+</fieldset>
+<p class="err" id="verr" role="alert"></p>
+<button class="btn" type="submit" id="vbtn">Save my vote</button>
+<div id="results" aria-live="polite">
+<p id="lead"></p>
+<div class="bars">
+<div class="bar"><i id="bp" style="background:var(--pink)"></i><b><span>Team Pink</span><span id="cp">0</span></b></div>
+<div class="bar"><i id="bb" style="background:var(--blue)"></i><b><span>Team Blue</span><span id="cb">0</span></b></div>
+</div>
+</div>
+</form>
+</section>
+
+<section id="rsvp">
+<h2>Join us</h2>
+<form id="f" novalidate>
+<div class="row">
+<div><label class="f" for="name">Your name</label><input id="name" type="text" autocomplete="name"></div>
+<div><label class="f" for="n">Guests</label><input id="n" type="number" min="1" max="10" value="1"></div>
+</div>
+<fieldset>
+<legend>What will you bring?</legend>
+<p class="hint">Totally optional. Pick as many as you like so we can avoid doubles.</p>
+<div class="chips" id="chips"></div>
+</fieldset>
+<div><label class="f" for="note">Anything else? (optional)</label><input id="note" type="text" placeholder="Allergies, a message, a baby name idea"></div>
+<p class="err" id="err" role="alert"></p>
+<button class="btn" type="submit">Make my RSVP</button>
+<div class="out" id="out" aria-live="polite"></div>
+<div class="actions" id="act" hidden>
+<button class="btn" type="button" id="copy">Copy message</button>
+<a class="btn alt" id="sms" href="#">Send by text</a>
+</div>
+</form>
+</section>
+</main>
+<footer>Can’t wait to celebrate with you.</footer>
+<script>
+// Edit these details
+var HOST_PHONE = "";
+var items = ["Diapers","Wipes","Baby wash","Onesies","Bottles","Blankets","Burp cloths","Pacifiers","Baby lotion","Food or drinks","Just me, no gift"];
+var chips = document.getElementById("chips");
+items.forEach(function(t){
+  var l = document.createElement("label"); l.className = "chip";
+  l.innerHTML = '<input type="checkbox" value="'+t+'"><span>'+t+'</span>';
+  chips.appendChild(l);
+});
+var f = document.getElementById("f"), out = document.getElementById("out"), act = document.getElementById("act"), err = document.getElementById("err"), msg = "";
+f.addEventListener("submit", function(e){
+  e.preventDefault();
+  var name = document.getElementById("name").value.trim();
+  if(!name){ err.textContent = "Add your name so we know who’s coming."; return; }
+  err.textContent = "";
+  var team = window.__myTeam || "Undecided";
+  var bring = Array.prototype.map.call(f.querySelectorAll('#chips input:checked'), function(i){return i.value;});
+  var note = document.getElementById("note").value.trim();
+  msg = "RSVP: I’m in! 🎉\nName: "+name+"\nGuests: "+document.getElementById("n").value+"\nMy guess: "+team+"\nBringing: "+(bring.length?bring.join(", "):"Nothing yet")+(note?"\nNote: "+note:"");
+  out.textContent = msg; out.className = "out on"; act.hidden = false;
+  document.getElementById("sms").href = "sms:"+HOST_PHONE+"?&body="+encodeURIComponent(msg);
+  out.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+document.getElementById("copy").addEventListener("click", function(){
+  var b = this;
+  function done(){ b.textContent = "Copied"; setTimeout(function(){ b.textContent = "Copy message"; }, 1800); }
+  if(navigator.clipboard){ navigator.clipboard.writeText(msg).then(done, function(){}); }
+});
+var vf=document.getElementById("vf"),verr=document.getElementById("verr"),vbtn=document.getElementById("vbtn"),res=document.getElementById("results"),vdb=null,subscribed=false;
+var names={pink:"Team Pink",blue:"Team Blue"};
+function hashPhone(s){
+  try{return crypto.subtle.digest("SHA-256",new TextEncoder().encode("reveal:"+s)).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ("0"+x.toString(16)).slice(-2)}).join("").slice(0,32)});}
+  catch(e){return Promise.resolve("p"+s);}
+}
+function render(snap){
+  var p=0,b=0;
+  snap.docs.forEach(function(d){var t=(d.data()||{}).team;if(t==="pink")p++;else if(t==="blue")b++;});
+  var tot=p+b||1;
+  document.getElementById("cp").textContent=p+(p===1?" vote":" votes");
+  document.getElementById("cb").textContent=b+(b===1?" vote":" votes");
+  document.getElementById("bp").style.width=(p/tot*100)+"%";
+  document.getElementById("bb").style.width=(b/tot*100)+"%";
+  document.getElementById("lead").textContent=p===b?(p?"It’s a tie!":"No votes yet"):(p>b?"Team Pink is ahead by ":"Team Blue is ahead by ")+Math.abs(p-b)+(Math.abs(p-b)===1?" vote":" votes");
+}
+function reveal(){
+  res.className="on";
+  if(vdb&&!subscribed){subscribed=true;vdb.collection("votes").onSnapshot(render,function(){document.getElementById("lead").textContent="Results are unavailable right now.";});}
+}
+function confetti(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  var cols=["#f4b6c8","#a9cdf0","#ee7fa3","#6aa9e0","#fff"];
+  for(var i=0;i<46;i++){var c=document.createElement("span");c.className="conf";
+    c.style.left=Math.random()*100+"vw";c.style.background=cols[i%5];c.style.setProperty("--dx",(Math.random()*160-80)+"px");c.style.animationDelay=Math.random()*.5+"s";
+    document.body.appendChild(c);setTimeout(function(el){el.remove();}.bind(null,c),3400);}
+}
+function setTeam(t){window.__myTeam=names[t];}
+if(window.claude&&claude.use){claude.use("db").then(function(d){
+  vdb=d;
+  if(!d){verr.textContent="Voting needs you to be signed in to view this page.";return;}
+  try{var saved=localStorage.getItem("revealVote");if(saved){setTeam(saved);reveal();}}catch(e){}
+}).catch(function(){});}
+vf.addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=document.getElementById("vname").value.trim(),digits=document.getElementById("vphone").value.replace(/\D/g,""),pick=vf.querySelector('input[name=vt]:checked');
+  if(!name){verr.textContent="Add your name.";return;}
+  if(digits.length<7){verr.textContent="Enter a phone number with at least 7 digits.";return;}
+  if(!pick){verr.textContent="Pick Team Pink or Team Blue.";return;}
+  if(!vdb){verr.textContent="Voting isn’t available here. Open the invitation while signed in.";return;}
+  verr.textContent="";vbtn.disabled=true;
+  hashPhone(digits).then(function(h){
+    var ref=vdb.collection("votes").doc(h);
+    return ref.get().then(function(s){
+      if(s.exists){var t=(s.data()||{}).team;setTeam(t);verr.textContent="This number already voted for "+names[t]+".";reveal();return;}
+      return ref.set({team:pick.value,name:name,at:Date.now()}).then(function(){
+        setTeam(pick.value);try{localStorage.setItem("revealVote",pick.value);}catch(e){}
+        vbtn.textContent="Vote saved";confetti();reveal();
+      });
+    });
+  }).catch(function(){verr.textContent="Couldn’t save your vote. Check your connection and try again.";}).then(function(){vbtn.disabled=false;});
+});
+</script>
+</body>
+</html>
